@@ -1,16 +1,20 @@
-$(document).ready(function(){
-  $("#signIn").click(function(){
-    $("#signInInfo").show();
+$(document).ready(function(){ 
+  function showSignIn() {
+      $("#signInInfo").show();
+      $("#signUpInfo").hide();
+  }
+  
+  function showCreateAccount() {
+      $("#signUpInfo").show();
+      $("#signInInfo").hide();
+  }
+  
+  $("#signIn").click(function(event) {
+      event.preventDefault();
+      showSignIn();
+  });
+  $("#createAccount").click(function(event) {
+      event.preventDefault();
+      showCreateAccount();
   });
 });
-
-$(document).ready(function(){
-  $("#createAccount").click(function(){
-    $("#signInInfo").show();
-  });
-});
-
-
-
-
-

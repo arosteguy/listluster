@@ -12,9 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-var routes = require("./controllers/item-controller");
+// var routes = require("./controllers/item-controller");
 
-app.use(routes);
+// app.use(routes);
+require("./routes/htmlRoutes")(app);
 
 // listen on port 3000
 var PORT = process.env.PORT || 3000;

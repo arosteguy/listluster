@@ -1,6 +1,6 @@
 var path = require("path");
 
-var isAuthenticated = require("..config/middleware/is Authenticated");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 
 
@@ -10,7 +10,7 @@ module.exports = function(app) {
         if (req.user){
             res.redirect("/members")
         }
-        res.sendFile(path.join(__dirname, "../public/signup.html"));
+        res.sendFile(path.join(__dirname, "../public/home.html"));
     });
     
     app.get("/login", function(req,res){
