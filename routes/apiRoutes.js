@@ -2,6 +2,13 @@
 var db = require("../models");
 
 module.exports = function(app) {
+    app.get("/api/lists", function(req, res) {
+        db.List.findAll({}).then(function(dbLists) {
+            res.json(dbLists);
+        })
+    })
+
+
       // GET route for all the checklist items
     app.get("/api/createItems", function(req, res) {
         db.CreateItem.findAll({}).then(function(dbCreateItem) {
