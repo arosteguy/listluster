@@ -1,8 +1,20 @@
-function signIn() {
-    var x = document.getElementById("signIn");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    }else {
-        x.style.display = "none";
-    }
-};
+$(document).ready(function(){ 
+  function showSignIn() {
+      $("#signInInfo").show();
+      $("#signUpInfo").hide();
+  }
+  
+  function showCreateAccount() {
+      $("#signUpInfo").show();
+      $("#signInInfo").hide();
+  }
+  
+  $("#signIn").click(function(event) {
+      event.preventDefault();
+      showSignIn();
+  });
+  $("#createAccount").click(function(event) {
+      event.preventDefault();
+      showCreateAccount();
+  });
+});
