@@ -1,0 +1,13 @@
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width: 100%;
+}
+#carousel-container{
+    width: 68%;
+    margin-left: 35px;
+    float: left;
+    margin-right: 68px;
+}
+
+#signIn{
+    text-align: center;
+}
