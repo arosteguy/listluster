@@ -8,9 +8,18 @@
     margin-right: 68px;
 }
 
-#signIn{
+#signInInfo,
+#signUpInfo{
     text-align: center;
+    display: none;
 }
+
+
+.container{
+    margin-top: 15px;
+    background: none;
+}
+
 
 
 
