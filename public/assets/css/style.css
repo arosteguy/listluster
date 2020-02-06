@@ -8,10 +8,12 @@
     margin-right: 68px;
 }
 
-#signInInfo{
+#signInInfo,
+#signUpInfo{
     text-align: center;
     display: none;
 }
+
 
 .container{
     margin-top: 15px;
