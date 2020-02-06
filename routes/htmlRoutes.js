@@ -1,6 +1,6 @@
 var path = require("path");
 
-var isAuthenticated = require("..config/middleware/is Authenticated");
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 
 

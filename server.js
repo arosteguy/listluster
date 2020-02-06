@@ -11,10 +11,10 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+require("./routes/authRoutes")(app);
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
-var routes = require("./controllers/item-controller");
-
-app.use(routes);
 
 // listen on port 3000
 var PORT = process.env.PORT || 3000;
