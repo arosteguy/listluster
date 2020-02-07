@@ -1,15 +1,14 @@
 module.exports = function(sequelize, DataTypes) {
     var List = sequelize.define("List", {
-        list_name: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        list_category: {
-            type: DataTypes.STRING,
-            defaultValue: "Default"
+        text: {
+            type: DataTypes.TEXT
         },
-        list_items: {
-            type: DataTypes.TEXT,
+        complete: {
+            type: DataTypes.BOOLEAN,
             allowNull: false
         }
     })
