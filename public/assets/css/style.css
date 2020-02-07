@@ -20,6 +20,20 @@
     background: none;
 }
 
+.navbar{
+    font-family: 'Anton', sans-serif;
+    color: green;
+}
 
-
+.btn{
+    font-family: 'Anton', sans-serif;
+    background-color: orange;
+    border-color: red;
+    color: olive;
+}
+.btn:hover{
+    border-color: orange;
+    background-color: red;
+    color: yellow;
+}
 
