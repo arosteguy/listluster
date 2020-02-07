@@ -23,6 +23,7 @@
 .navbar{
     font-family: 'Anton', sans-serif;
     color: green;
+    background: orange url(../../images/black-thread\ \(1\).png);
 }
 
 .btn{
