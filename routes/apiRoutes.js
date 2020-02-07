@@ -9,25 +9,29 @@ module.exports = function(app) {
     })
 
 
-      // GET route for all the checklist items
-    app.get("/api/createItems", function(req, res) {
-        db.CreateItem.findAll({}).then(function(dbCreateItem) {
+
+
+    //   // GET route for all the checklist items
+    // app.get("/api/createItems", function(req, res) {
+    //     db.CreateItem.findAll({}).then(function(dbCreateItem) {
           
-          res.json(dbCreateItem);
-        });
-      });
+    //       res.json(dbCreateItem);
+    //     });
+    //   });
     // POST route for saving a checklist item
-    app.post("api/createItems", function(req, res){
-        db.CreateItem.create({
+    app.post("api/lists", function(req, res){
+        // sanity check
+        db.List.create({
             text: req.body.text,
             complete: req.body.complete
-        }).then(function(dbCreateItem){
-            res.json(dbCreateItem);   
+        }).then(function(dbLists){
+            res.json(dbLists);   
         })
         .catch(function(err) {
             res.json(err);
         });
     }); 
+    
     // PUT route for updating checklist items
     app.put("/api/createItems", function(req,res){
         db.CreateItem.update({
