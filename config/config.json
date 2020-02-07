@@ -1,7 +1,11 @@
 {
     "development": {
       "username": "root",
+<<<<<<< HEAD
+      "password": "19691969",
+=======
       "password": "Denveru37!",
+>>>>>>> abec03b211f0437526c18f58397cc54b97788be6
       "database": "checklist_db",
       "host": "127.0.0.1",
       "port": 3306,
