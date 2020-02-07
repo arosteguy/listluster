@@ -26,6 +26,11 @@
 
 .btn{
     font-family: 'Anton', sans-serif;
+    background-color: orange;
+    border-color: red;
 }
-
+.btn:hover{
+    border-color: orange;
+    background-color: red;
+}
 
