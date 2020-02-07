@@ -9,7 +9,7 @@ $(document).ready(function () {
     // use concat todostring = todostring + 'input box variable' + ||
     // sanity checkou
     // Getting a reference to the input field where user adds a new todo
-
+    var $newinputTitle = $("#list-title");
     var $newItemInput = $("input.new-item");
     // Our new todos will go inside the todoContainer
     var $todoContainer = $(".todo-container");
@@ -89,6 +89,7 @@ $(document).ready(function () {
     function insertTodo(event) {
         event.preventDefault();
         var todo = {
+            title: $newinputTitle.val().trim(),
             text: $newItemInput.val().trim(),
             complete: false
         };

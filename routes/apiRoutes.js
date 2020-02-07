@@ -19,9 +19,12 @@ module.exports = function(app) {
     //     });
     //   });
     // POST route for saving a checklist item
-    app.post("api/lists", function(req, res){
+    app.post("/api/lists", function(req, res){
         // sanity check
+        console.log(req.body.text);
+        console.log(req.body.complete);
         db.List.create({
+            title: req.body.title,
             text: req.body.text,
             complete: req.body.complete
         }).then(function(dbLists){
@@ -31,7 +34,7 @@ module.exports = function(app) {
             res.json(err);
         });
     }); 
-    
+
     // PUT route for updating checklist items
     app.put("/api/createItems", function(req,res){
         db.CreateItem.update({
