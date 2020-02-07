@@ -31,6 +31,7 @@ module.exports = function(app) {
             res.json(err);
         });
     }); 
+    
     // PUT route for updating checklist items
     app.put("/api/createItems", function(req,res){
         db.CreateItem.update({
