@@ -28,12 +28,18 @@ $(document).ready(function() {
         email: email,
         password: password
       })
+
+      // validate    middleware    res w/ err msg
         .then(function() {
+          
           window.location.replace("/members");
           // If there's an error, log the error
         })
         .catch(function(err) {
           console.log(err);
+          
         });
     }
   });
+
+  // 

@@ -15,7 +15,7 @@ passport.use(new LocalStrategy(
       }).then(function (dbUser) {
         if (!dbUser) {
           return done(null, false, {
-            message: "Incorrect email."
+            message: "No user found. Please create a log in"
       });
     }else if (!dbUser.validPassword(password)) {
       return done(null, false, {
