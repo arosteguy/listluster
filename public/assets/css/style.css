@@ -58,6 +58,23 @@
     background-color: #F7C331;
     color: #6B7A8F;
 }
+#addButt{
+    color: #6B7A8F;
+    background-color: #DCC7AA;
+}
+
+#addButt:hover{
+    background-color: #F7C331;
+}
+
+#saveList{
+    color: #6B7A8F;
+    background-color: #DCC7AA;
+}
+
+#saveList:hover{
+    background-color: #F7C331;
+}
 
 #showSavedLists{
     color: #6B7A8F;
