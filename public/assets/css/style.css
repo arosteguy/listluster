@@ -1,7 +1,9 @@
-.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+.carousel-inner>.item>img,
+.carousel-inner>.item>a>img {
     width: 100%;
 }
-#carousel-container{
+
+#carousel-container {
     width: 68%;
     margin-left: 35px;
     float: left;
@@ -9,36 +11,42 @@
 }
 
 #signInInfo,
-#signUpInfo{
+#signUpInfo {
     text-align: center;
     display: none;
 }
 
+.todo-list,
+#savedLists {
+    display: none;
+}
 
-.container{
+
+.container {
     margin-top: 15px;
     background: none;
 }
 
-.navbar{
+.navbar {
     font-family: 'Anton', sans-serif;
     color: green;
     /* background: #e66b00 url(../../images/black-thread\ \(1\).png); */
 }
 
-.btn{
+.btn {
     font-family: 'Anton', sans-serif;
     background-color: orange;
     border-color: red;
     color: olive;
 }
-.btn:hover{
+
+.btn:hover {
     border-color: orange;
     background-color: red;
     color: yellow;
 }
 
-.jumbotron{
+.jumbotron {
     background-color: red;
     background: #e66b00 url(../../images/black-thread\ \(1\).png);
 }

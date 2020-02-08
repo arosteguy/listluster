@@ -42,9 +42,20 @@ $(document).ready(function () {
     //     }
 
     //     // This function grabs todos from the database and updates the view
+    // function getTodos() {
+    //     $.get("/api/lists", function (data) {
+    //         todos = data;
+    //         initializeRows();
+    //     });
+    // }
+
     function getTodos() {
-        $.get("/api/lists", function (data) {
-            todos = data;
+        const listId = $(document).data("list-id");
+        if (!listId) return false;
+
+        $.get("/api/lists/" + listId, function (data) {
+            // console.log(data.)
+            todos = data.Items;
             initializeRows();
         });
     }
@@ -58,43 +69,60 @@ $(document).ready(function () {
         $todoContainer.prepend(rowsToAdd);
     }
 
-// This function constructs a todo-item row
+    // This function constructs a todo-item row
     function createNewRow(todo) {
-      var $newInputRow = $(
-        [
-          "<li class='list-group-item todo-item'>",
-          "<span>",
-          todo.text,
-          "</span>",
-          "<input type='text' class='edit' style='display: none;'>",
-          "<button class='delete btn btn-danger'>x</button>",
-          "<button class='complete btn btn-primary'>✓</button>",
-          "</li>"
-        ].join("")
-      );
+        var $newInputRow = $(
+            [
+                "<li class='list-group-item todo-item'>",
+                "<span>",
+                todo.text,
+                "</span>",
+                "<input type='text' class='edit' style='display: none;'>",
+                "<button class='delete btn btn-danger'>x</button>",
+                "<button class='complete btn btn-primary'>✓</button>",
+                "</li>"
+            ].join("")
+        );
 
-      $newInputRow.find("button.delete").data("id", todo.id);
-      $newInputRow.find("input.edit").css("display", "none");
-      $newInputRow.data("todo", todo);
-      if (todo.complete) {
-        $newInputRow.find("span").css("text-decoration", "line-through");
-      }
-      return $newInputRow;
+        $newInputRow.find("button.delete").data("id", todo.id);
+        $newInputRow.find("input.edit").css("display", "none");
+        $newInputRow.data("todo", todo);
+        if (todo.complete) {
+            $newInputRow.find("span").css("text-decoration", "line-through");
+        }
+        return $newInputRow;
     }
 
 
 
+    function saveList() {
+        $.get("/api/user_data", (response) => {
+            console.log("User data: ", response);
+            var list = {
+                title: $newinputTitle.val().trim(),
+                userId: response.id
+            };
+
+            $.post("/api/lists", list, ({ id }) => {
+                $(".todo-list").show();
+                $("#saveList").hide();
+                $(document).data({ "list-id": id });
+            })
+        })
+    }
 
 
     function insertTodo(event) {
         event.preventDefault();
+        const ListId = $(document).data("list-id");
+
         var todo = {
-            title: $newinputTitle.val().trim(),
             text: $newItemInput.val().trim(),
-            complete: false
+            complete: false,
+            ListId: ListId
         };
 
-        $.post("/api/lists", todo, getTodos);
+        $.post("/api/items", todo, getTodos);
         $newItemInput.val("");
     }
 
@@ -111,6 +139,11 @@ $(document).ready(function () {
         $("#signInInfo").hide();
     }
 
+    $("#saveList").click(function (event) {
+        event.preventDefault();
+        saveList();
+    })
+
     $("#signIn").click(function (event) {
         event.preventDefault();
         showSignIn();
@@ -120,6 +153,17 @@ $(document).ready(function () {
         event.preventDefault();
         showCreateAccount();
     });
+
+    $("#showSavedLists").on("click", function (event) {
+        event.preventDefault();
+        $("#savedLists").toggle("slow", function () {
+            if ($(this).is(":visible")) {
+                $("#showSavedLists").text("Hide Saved Lists");
+            } else {
+                $("#showSavedLists").text("Show Saved Lists");
+            }
+        });
+    })
 
     $("#signUpInfo").on("submit", function (event) {
         event.preventDefault();
@@ -150,163 +194,34 @@ $(document).ready(function () {
     });
 });
 
-// This function constructs a todo-item row
-//     function createNewRow(todo) {
-//       var $newInputRow = $(
-//         [
-//           "<li class='list-group-item todo-item'>",
-//           "<span>",
-//           todo.text,
-//           "</span>",
-//           "<input type='text' class='edit' style='display: none;'>",
-//           "<button class='delete btn btn-danger'>x</button>",
-//           "<button class='complete btn btn-primary'>✓</button>",
-//           "</li>"
-//         ].join("")
-//       );
+// when page loads, this pulls user data from the auth to get the user's id
+$.get("/api/user_data", (response) => {
+    // if no user is logged in, break out of function
+    if (!response.id) return false;
 
-//       $newInputRow.find("button.delete").data("id", todo.id);
-//       $newInputRow.find("input.edit").css("display", "none");
-//       $newInputRow.data("todo", todo);
-//       if (todo.complete) {
-//         $newInputRow.find("span").css("text-decoration", "line-through");
-//       }
-//       return $newInputRow;
-//     }
+    // if user is logged in, get all user info -- user obj with nested List array containing todo Items
+    $.get("/api/users/" + response.id, ({ Lists }) => {
+        // for each list...
+        for (const list of Lists) {
+            // make a div for that list
+            const listDiv = $("<div>");
+            // add an h1 of the list's title
+            listDiv.append(`<h1>${list.title}</h1>`);
+            // and an opening ul tag
+            const listUl = $("<ul>");
 
+            // then loop through that list's items
+            for (const item of list.Items) {
+                // and make one li for each list item
+                const itemLi = $(`<li>${item.text} | Completed: ${item.complete}</li>`);
+                listUl.append(itemLi);
+            }
 
+            // appending the entire list to the wrapper div
+            listDiv.append(listUl);
+            // and appending the wrapper div to the page
+            $("#savedLists").append(listDiv);
 
-
-
-// $(document).ready(function() {
-//     // Getting a reference to the input field where user adds a new todo
-//     var $newItemInput = $("input.new-item");
-//     // Our new todos will go inside the todoContainer
-//     var $todoContainer = $(".todo-container");
-//     // Adding event listeners for deleting, editing, and adding todos
-//     $(document).on("click", "button.delete", deleteTodo);
-//     $(document).on("click", "button.complete", toggleComplete);
-//     $(document).on("click", ".todo-item", editTodo);
-//     $(document).on("keyup", ".todo-item", finishEdit);
-//     $(document).on("blur", ".todo-item", cancelEdit);
-//     $(document).on("submit", "#todo-form", insertTodo);
-
-//     // Our initial todos array
-//     var todos = [];
-
-//     // Getting todos from database when page loads
-//     getTodos();
-
-//     // This function resets the todos displayed with new todos from the database
-//     function initializeRows() {
-//       $todoContainer.empty();
-//       var rowsToAdd = [];
-//       for (var i = 0; i < todos.length; i++) {
-//         rowsToAdd.push(createNewRow(todos[i]));
-//       }
-//       $todoContainer.prepend(rowsToAdd);
-//     }
-
-//     // This function grabs todos from the database and updates the view
-//     function getTodos() {
-//       $.get("/api/todos", function(data) {
-//         todos = data;
-//         initializeRows();
-//       });
-//     }
-
-//     // This function deletes a todo when the user clicks the delete button
-//     function deleteTodo(event) {
-//       event.stopPropagation();
-//       var id = $(this).data("id");
-//       $.ajax({
-//         method: "DELETE",
-//         url: "/api/todos/" + id
-//       }).then(getTodos);
-//     }
-
-//     // This function handles showing the input box for a user to edit a todo
-//     function editTodo() {
-//       var currentTodo = $(this).data("todo");
-//       $(this).children().hide();
-//       $(this).children("input.edit").val(currentTodo.text);
-//       $(this).children("input.edit").show();
-//       $(this).children("input.edit").focus();
-//     }
-
-//     // Toggles complete status
-//     function toggleComplete(event) {
-//       event.stopPropagation();
-//       var todo = $(this).parent().data("todo");
-//       todo.complete = !todo.complete;
-//       updateTodo(todo);
-//     }
-
-//     // This function starts updating a todo in the database if a user hits the "Enter Key"
-//     // While in edit mode
-//     function finishEdit(event) {
-//       var updatedTodo = $(this).data("todo");
-//       if (event.which === 13) {
-//         updatedTodo.text = $(this).children("input").val().trim();
-//         $(this).blur();
-//         updateTodo(updatedTodo);
-//       }
-//     }
-
-//     // This function updates a todo in our database
-//     function updateTodo(todo) {
-//       $.ajax({
-//         method: "PUT",
-//         url: "/api/todos",
-//         data: todo
-//       }).then(getTodos);
-//     }
-
-//     // This function is called whenever a todo item is in edit mode and loses focus
-//     // This cancels any edits being made
-//     function cancelEdit() {
-//       var currentTodo = $(this).data("todo");
-//       if (currentTodo) {
-//         $(this).children().hide();
-//         $(this).children("input.edit").val(currentTodo.text);
-//         $(this).children("span").show();
-//         $(this).children("button").show();
-//       }
-//     }
-
-//     // This function constructs a todo-item row
-//     function createNewRow(todo) {
-//       var $newInputRow = $(
-//         [
-//           "<li class='list-group-item todo-item'>",
-//           "<span>",
-//           todo.text,
-//           "</span>",
-//           "<input type='text' class='edit' style='display: none;'>",
-//           "<button class='delete btn btn-danger'>x</button>",
-//           "<button class='complete btn btn-primary'>✓</button>",
-//           "</li>"
-//         ].join("")
-//       );
-
-//       $newInputRow.find("button.delete").data("id", todo.id);
-//       $newInputRow.find("input.edit").css("display", "none");
-//       $newInputRow.data("todo", todo);
-//       if (todo.complete) {
-//         $newInputRow.find("span").css("text-decoration", "line-through");
-//       }
-//       return $newInputRow;
-//     }
-
-//     // This function inserts a new todo into our database and then updates the view
-//     function insertTodo(event) {
-//       event.preventDefault();
-//       var todo = {
-//         text: $newItemInput.val().trim(),
-//         complete: false
-//       };
-
-//       $.post("/api/todos", todo, getTodos);
-//       $newItemInput.val("");
-//     }
-//   });
+        }
+    })
+})
