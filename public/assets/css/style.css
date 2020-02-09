@@ -1,7 +1,9 @@
-.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+.carousel-inner>.item>img,
+.carousel-inner>.item>a>img {
     width: 100%;
 }
-#carousel-container{
+
+#carousel-container {
     width: 68%;
     margin-left: 35px;
     float: left;
@@ -9,36 +11,75 @@
 }
 
 #signInInfo,
-#signUpInfo{
+#signUpInfo {
     text-align: center;
     display: none;
 }
 
+.todo-list,
+#savedLists {
+    display: none;
+}
 
-.container{
+
+.container {
     margin-top: 15px;
     background: none;
 }
 
-.navbar{
+.navbar {
     font-family: 'Anton', sans-serif;
-    color: green;
-    /* background: #e66b00 url(../../images/black-thread\ \(1\).png); */
+    margin-bottom: 15px;
+    background-color: #6B7A8F;
+}
+.navbar-brand{
+    color: #F7C331;
+}
+.navbar-brand:hover{
+    color: #F7C331;
+}
+.nav-link{
+    color: #F7C331;
 }
 
-.btn{
-    font-family: 'Anton', sans-serif;
-    background-color: orange;
-    border-color: red;
-    color: olive;
-}
-.btn:hover{
-    border-color: orange;
-    background-color: red;
-    color: yellow;
+.nav-link:hover{
+    color: #A64500;
 }
 
-.jumbotron{
-    background-color: red;
-    background: #e66b00 url(../../images/black-thread\ \(1\).png);
+.btn {
+    font-family: 'Anton', sans-serif;
+    background-color: #DCC7AA;
+    border-color: #F7C331;
+    color: #6B7A8F;
+}
+
+.btn:hover {
+    border-color: #DCC7AA;
+    background-color: #F7C331;
+    color: #6B7A8F;
+}
+
+#showSavedLists{
+    color: #6B7A8F;
+    margin-left: 35px;
+    background-color: #DCC7AA;
+}
+
+#showSavedLists:hover{
+    background-color: #F7C331;
+}
+.jumbotron {
+    background-color: #F7C331;
+    background: #A64500 url(../../images/black-thread\ \(1\).png);
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+h1{
+    margin-left: 35px;
+    margin-top: 15px;
+}
+
+ul{
+    margin-left: 35px;
 }

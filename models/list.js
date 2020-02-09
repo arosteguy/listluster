@@ -3,16 +3,20 @@ module.exports = function(sequelize, DataTypes) {
         title: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        text: {
-            type: DataTypes.TEXT
-        },
-        complete: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false
         }
     })
 
+    List.associate = function(models) {
+        List.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false
+            }
+        })
+
+        List.hasMany(models.Item, {
+            onDelete: "CASCADE"
+        })
+    }
 
     return List;
     
