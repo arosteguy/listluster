@@ -84,7 +84,7 @@ $(document).ready(function () {
         var id = $(this).attr("data-id");
         $.ajax({
             method: "DELETE",
-            url: "/api/items" + id
+            url: "/api/items/" + id
         }).then(getTodos);
     }
 
