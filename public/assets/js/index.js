@@ -79,14 +79,14 @@ $(document).ready(function () {
         }
         $todoContainer.prepend(rowsToAdd);
     }
-     function deleteTodo(event) {
-        event.stopPropagation();
-        var id = $(this).attr("data-id");
-        $.ajax({
-            method: "DELETE",
-            url: "/api/items" + id
-        }).then(getTodos);
-    }
+    //  function deleteTodo(event) {
+    //     event.stopPropagation();
+    //     var id = $(this).attr("data-id");
+    //     $.ajax({
+    //         method: "DELETE",
+    //         url: "/api/items" + id
+    //     }).then(getTodos);
+    // }
 
     // This function constructs a todo-item row
     function createNewRow(todo) {
@@ -97,7 +97,7 @@ $(document).ready(function () {
                 todo.text,
                 "</span>",
                 "<input type='text' class='edit' style='display: none;'>",
-                "<button class='delete btn btn-danger' >x</button>",     
+                "<button class='delete btn btn-danger' data-id='" + todo.id + "'>x</button>",     
                 "<button class='complete btn btn-primary'>✓</button>",
                 "</li>"
             ].join("")
