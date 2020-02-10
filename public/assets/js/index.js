@@ -49,15 +49,15 @@ $(document).ready(function () {
     //     });
     // }
 
-    function deleteTodo(event) {
-        console.log (deleteTodo)
-        event.stopPropagation();
-        var id = $(this).data("id");
-        $.ajax({
-          method: "DELETE",
-          url: "/api/items/" + id
-        }).then(getTodos);
-      }
+    // function deleteTodo(event) {
+    //     console.log (deleteTodo)
+    //     event.stopPropagation();
+    //     var id = $(this).data("id");
+    //     $.ajax({
+    //       method: "DELETE",
+    //       url: "/api/items/" + id
+    //     }).then(getTodos);
+    //   }
     
     
     function getTodos() {
@@ -97,7 +97,7 @@ $(document).ready(function () {
                 todo.text,
                 "</span>",
                 "<input type='text' class='edit' style='display: none;'>",
-                "<button class='delete btn btn-danger' >x</button>",     
+                "<button class='delete btn btn-danger' data-id='" + todo.id + "'>x</button>",     
                 "<button class='complete btn btn-primary'>✓</button>",
                 "</li>"
             ].join("")
