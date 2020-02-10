@@ -49,15 +49,15 @@ $(document).ready(function () {
     //     });
     // }
 
-    function deleteTodo(event) {
-        console.log (deleteTodo)
-        event.stopPropagation();
-        var id = $(this).data("id");
-        $.ajax({
-          method: "DELETE",
-          url: "/api/items/" + id
-        }).then(getTodos);
-      }
+    // function deleteTodo(event) {
+    //     console.log (deleteTodo)
+    //     event.stopPropagation();
+    //     var id = $(this).data("id");
+    //     $.ajax({
+    //       method: "DELETE",
+    //       url: "/api/items/" + id
+    //     }).then(getTodos);
+    //   }
     
     
     function getTodos() {
@@ -79,14 +79,14 @@ $(document).ready(function () {
         }
         $todoContainer.prepend(rowsToAdd);
     }
-    //  function deleteTodo(event) {
-    //     event.stopPropagation();
-    //     var id = $(this).attr("data-id");
-    //     $.ajax({
-    //         method: "DELETE",
-    //         url: "/api/items" + id
-    //     }).then(getTodos);
-    // }
+     function deleteTodo(event) {
+        event.stopPropagation();
+        var id = $(this).attr("data-id");
+        $.ajax({
+            method: "DELETE",
+            url: "/api/items/" + id
+        }).then(getTodos);
+    }
 
     // This function constructs a todo-item row
     function createNewRow(todo) {
