@@ -20,6 +20,7 @@
   "homepage": "https://github.com/arosteguy/listluster#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "connect-session-sequelize": "^6.1.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "heroku": "^7.38.0",
