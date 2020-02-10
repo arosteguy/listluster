@@ -31,6 +31,35 @@ $(document).ready(function () {
 
     getTodos();
 
+    //     // This function resets the todos displayed with new todos from the database
+    //     function initializeRows() {
+    //       $todoContainer.empty();
+    //       var rowsToAdd = [];
+    //       for (var i = 0; i < todos.length; i++) {
+    //         rowsToAdd.push(createNewRow(todos[i]));
+    //       }
+    //       $todoContainer.prepend(rowsToAdd);
+    //     }
+
+    //     // This function grabs todos from the database and updates the view
+    // function getTodos() {
+    //     $.get("/api/lists", function (data) {
+    //         todos = data;
+    //         initializeRows();
+    //     });
+    // }
+
+    function deleteTodo(event) {
+        console.log (deleteTodo)
+        event.stopPropagation();
+        var id = $(this).data("id");
+        $.ajax({
+          method: "DELETE",
+          url: "/api/items/" + id
+        }).then(getTodos);
+      }
+    
+    
     function getTodos() {
         const listId = $(document).data("list-id");
         if (!listId) return false;
