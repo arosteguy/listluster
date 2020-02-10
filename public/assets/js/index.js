@@ -78,7 +78,7 @@ $(document).ready(function () {
                 todo.text,
                 "</span>",
                 "<input type='text' class='edit' style='display: none;'>",
-                "<button class='delete btn btn-danger'>x</button>",
+                "<button class='delete btn btn-danger'>x</button>",     
                 "<button class='complete btn btn-primary'>✓</button>",
                 "</li>"
             ].join("")
@@ -125,7 +125,13 @@ $(document).ready(function () {
         $.post("/api/items", todo, getTodos);
         $newItemInput.val("");
     }
-
+    // function handleTodoDelete() {
+    //     var currentTodo = $(this)
+    //       .parent()
+    //       .parent()
+    //       .data("item");
+    //     deletePost(currentTodo.id);
+    //   }
 
 
 

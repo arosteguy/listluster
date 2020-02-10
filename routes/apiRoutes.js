@@ -65,9 +65,17 @@ module.exports = function(app) {
             res.json(err);
         })
     })
+   
 
-
-
+     app.delete("/api/items/:id", function(req, res) {
+        db.Item.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(dbItem) {
+            res.json(dbItem);
+        });
+    });
 
     //   // GET route for all the checklist items
     // app.get("/api/createItems", function(req, res) {
