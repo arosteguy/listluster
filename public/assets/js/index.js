@@ -14,7 +14,7 @@ $(document).ready(function () {
     // Our new todos will go inside the todoContainer
     var $todoContainer = $(".todo-container");
     // Adding event listeners for deleting, editing, and adding todos
-
+    $(document).on("click", "button.delete", deleteTodo);
     $(document).on("click", "#addButt", insertTodo);
 
 
@@ -49,6 +49,17 @@ $(document).ready(function () {
     //     });
     // }
 
+    function deleteTodo(event) {
+        console.log (deleteTodo)
+        event.stopPropagation();
+        var id = $(this).data("id");
+        $.ajax({
+          method: "DELETE",
+          url: "/api/items/" + id
+        }).then(getTodos);
+      }
+    
+    
     function getTodos() {
         const listId = $(document).data("list-id");
         if (!listId) return false;

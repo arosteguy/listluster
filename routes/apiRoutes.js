@@ -67,7 +67,7 @@ module.exports = function(app) {
     })
    
 
-     app.delete("/api/items/:id", function(req, res) {
+    app.delete("/api/items/:id", function(req, res) {
         db.Item.destroy({
             where: {
                 id: req.params.id
