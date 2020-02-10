@@ -16,7 +16,7 @@ $(document).ready(function () {
     // Adding event listeners for deleting, editing, and adding todos
     $(document).on("click", "button.delete", deleteTodo);
     $(document).on("click", "#addButt", insertTodo);
-
+ 
 
     // create a click event for the save button
     // grabe the list name from the html
@@ -79,6 +79,14 @@ $(document).ready(function () {
         }
         $todoContainer.prepend(rowsToAdd);
     }
+     function deleteTodo(event) {
+        event.stopPropagation();
+        var id = $(this).attr("data-id");
+        $.ajax({
+            method: "DELETE",
+            url: "/api/items" + id
+        }).then(getTodos);
+    }
 
     // This function constructs a todo-item row
     function createNewRow(todo) {
@@ -89,7 +97,7 @@ $(document).ready(function () {
                 todo.text,
                 "</span>",
                 "<input type='text' class='edit' style='display: none;'>",
-                "<button class='delete btn btn-danger'>x</button>",     
+                "<button class='delete btn btn-danger' >x</button>",     
                 "<button class='complete btn btn-primary'>✓</button>",
                 "</li>"
             ].join("")
@@ -136,13 +144,7 @@ $(document).ready(function () {
         $.post("/api/items", todo, getTodos);
         $newItemInput.val("");
     }
-    // function handleTodoDelete() {
-    //     var currentTodo = $(this)
-    //       .parent()
-    //       .parent()
-    //       .data("item");
-    //     deletePost(currentTodo.id);
-    //   }
+    
 
 
 
